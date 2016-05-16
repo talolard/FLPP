@@ -25,4 +25,4 @@ void PatternBase::internalDelay(){
 void PatternBase::FPSIncrementSin() {
     int val =map(sin8_C(FPSIncrementer++),0,255,13,20);
     updateFPS(val);}
-void PatternBase::sinBrightNessInc() {brightness =beatsin8(brightNessBPM,20,255);}
+void PatternBase::sinBrightNessInc() {brightness =beatsin8(brightNessBPM,80,255);}

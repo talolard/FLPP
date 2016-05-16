@@ -36,7 +36,7 @@ void PatternChanger::updateLeds(){
         delay(currentPattern->delayRate);
     }
     else{
-        FastLED.delay(beatsin8(1,10,250));
+        FastLED.delay(beatsin8(0.5,90,130));
     }
 
 }

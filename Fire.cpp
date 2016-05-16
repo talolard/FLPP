@@ -5,7 +5,7 @@
 #include "Fire.h"
 
 Fire::Fire(CRGB* l,int16_t nl) : PatternBase(l,nl){
-    delayRate=70;
+    delayRate=65;
     heat = new uint8_t[numLeds];
 }
 Fire::~Fire(){
@@ -19,7 +19,7 @@ void Fire::updateLeds()
 
     // Step 1.  Cool down every cell a little
     for( int i = 0; i < numLeds; i++) {
-            heat[i] = qsub8( heat[i],  /*((beatsin8(0.1,3,100)) ) + 2*/random8(5));
+            heat[i] = qsub8( heat[i],  /*((beatsin8(0.1,3,100)) ) + 2*/random8(2));
     }
 
     // Step 2.  Heat from each cell drifts 'up' and diffuses a little
@@ -28,7 +28,7 @@ void Fire::updateLeds()
     }
 
     // Step 3.  Randomly ignite new 'sparks' of heat near the bottom
-    if( random8() < 200) {
+    if( random8() < beatsin8(0.2,60,160)) {
         int y = random8(numLeds);
         heat[y] = qadd8( heat[y], random8(160,255) );
     }

@@ -6,7 +6,6 @@
 #include "SqauresPattern.h"
 #include "FlickerLightPattern.h"
 #include "Fire.h"
-#include "palletes.h"
 #include "PalleteServer.h"
 #include "CheckerPattern.h"
 #include "PatternServer.h"
@@ -22,8 +21,8 @@ void setup() {
     delay(200);
     randomSeed(analogRead(A0));
 
-    FastLED.addLeds<WS2812, DATA_PIN,BRG>(leds, NUM_LEDS/3);
-    FastLED.addLeds<WS2812, 8,GRB>(leds, NUM_LEDS);
+    FastLED.addLeds<WS2812, DATA_PIN,BRG>(leds, NUM_LEDS);
+    //FastLED.addLeds<WS2812, 8,GRB>(leds, NUM_LEDS);
     for (int i =0; i<NUM_LEDS; i++){
         leds[i] = CRGB::Red;
     }
@@ -51,6 +50,7 @@ void setup() {
 
 
 void loop() {
+    random16_add_entropy( random());
     Changer->updateLeds();
     FastLED.show();
 }

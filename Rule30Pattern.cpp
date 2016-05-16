@@ -10,11 +10,10 @@ Rule31Pattern::Rule31Pattern(CRGB *l, int16_t nl) :PatternBase(l,nl) {
     cells[1] =new bool[numLeds];
     cellColors = new uint8_t[numLeds];
     for (int i =0; i<numLeds; i++){
-        cellColors[i] =(i/10)*20;
-        cells[currentCell][i] = random(1);
+        cellColors[i] =100;
+        cells[currentCell][i] = random(2);
     }
     currentCell=0;
-    delayRate =20;
 }
 Rule31Pattern::~Rule31Pattern() {
     delete cells[0];
@@ -35,18 +34,20 @@ void Rule31Pattern::updateCells() {
     uint8_t nextCell = (currentCell+1) %2;
     for (uint8_t i =0; i<numLeds;i++){
         cells[nextCell][i] =rules(cells[currentCell][i-1],cells[currentCell][i],cells[currentCell][(i+1)%numLeds]);
-        cellColors[i] += cells[nextCell][i] ? random(2) :-1*random(2);
+        cellColors[i] += cells[nextCell][i] ? random(5) :-1*random(5);
     }
     currentCell =nextCell;
 }
 
 void Rule31Pattern::updateLeds() {
+    uint8_t temp = beatsin8(1,10,20);
     CRGB color = ColorFromPalette(*currentPallete, cellColors[0], 255, LINEARBLEND);
     for (uint8_t i =0; i<numLeds;i++){
-        if (i%2 ==0){
-            color = ColorFromPalette(*currentPallete, cellColors[i], 255, LINEARBLEND);
+        if (random8()%temp ==0){
+            color = ColorFromPalette(*currentPallete, random8(255)/*cellColors[i]*/, 255, LINEARBLEND);
+            leds[i]=color;//ColorFromPalette(*currentPallete, cellColors[i], 255, LINEARBLEND);
         }
-        leds[i]=color;//ColorFromPalette(*currentPallete, cellColors[i], 255, LINEARBLEND);
+
     }
     CRGB last =leds[numLeds-1];
 

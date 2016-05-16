@@ -6,7 +6,8 @@
 #include "globals.h"
 
 SqauresPattern::SqauresPattern(CRGB* l,int16_t nl) : PatternBase(l,nl){
-    direction = random() %2 ==1 ? 1:-1;
+    direction = -1;//random() %2 ==1 ? 1:-1;
+    //delayRate =90;
 }
 void SqauresPattern::updateLeds() {
     static uint8_t  colorIt = 0;
@@ -14,6 +15,6 @@ void SqauresPattern::updateLeds() {
     for (int i = 0; i < numLeds; i++) {
         leds[i] = ColorFromPalette(*currentPallete, map(i,0,numLeds,0,255)+colorIt*direction, brightness, LINEARBLEND);
     }
-    colorIt+=5;
+    colorIt+=7;
 
 }
