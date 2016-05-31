@@ -17,6 +17,7 @@ class PatternChanger {
     unsigned long  palleteTimeThresh;
 
 public:
+    void blackOutNose();
     void updateLeds();
     void changePattern();
     void changePallete();

@@ -7,6 +7,7 @@
 #include "PatternServer.h"
 #include "PalleteServer.h"
 #include "patternBase.h"
+
 #include "Rule30Pattern.h"
 #include "Fire.h"
 
@@ -31,6 +32,10 @@ void PatternChanger::updateLeds(){
         changePattern();
     }
     currentPattern->updateLeds();
+#ifdef BEAR
+    blackOutNose();
+#endif
+
     if (currentPattern->delayRate){
         //If this pattern defines a delayRate.
         delay(currentPattern->delayRate);
@@ -72,4 +77,12 @@ bool PatternChanger::shouldChangePattern(){
         return true;
     }
     return false;
+}
+void PatternChanger::blackOutNose() {
+        uint8_t NoseStart=38;
+        uint8_t NoseEnd =47;
+        for (int i=NoseStart; i<= NoseEnd; i++){
+            leds[i] = CRGB::Black;
+        }
+
 }
