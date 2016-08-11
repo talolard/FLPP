@@ -11,6 +11,8 @@ class CRGB;
 class PatternChanger {
     CRGB* leds;
     PatternBase* currentPattern;
+    uint8_t patternCode;
+    uint8_t palleteCode;
     unsigned long lastTimeStampPat;
     unsigned long lastTimeStampPal;
     unsigned long  patternTimeThresh;

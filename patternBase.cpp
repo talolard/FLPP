@@ -7,7 +7,7 @@
 #include "PalleteServer.h"
 PatternBase::PatternBase(CRGB *l,int16_t nl) {
     PalleteServer* PS = PalleteServer::getInstance();
-    currentPallete =PS->changePallete(random8(11));
+    currentPallete =PS->changePallete(random8(30));
     leds=l;
     brightness =100;
     FastLED.setBrightness(brightness);

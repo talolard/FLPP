@@ -6,13 +6,14 @@
 #define MBLIGHTS_GLOBALS_H
 
 #include "FastLED.h"
+#define TREE
 #ifdef TREE
 #define NUM_STRIPS 24
 #define LEDS_PER_STRIP 50
 #define NUM_LEDS LEDS_PER_STRIP*NUM_STRIPS
-#define FIRE_DELAY 45
+#define FIRE_DELAY 25
 #else
-#define TREE
+#define BEAR
 #define NUM_STRIPS 1
 #define LEDS_PER_STRIP 150
 #define NUM_LEDS LEDS_PER_STRIP*NUM_STRIPS

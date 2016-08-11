@@ -8,10 +8,10 @@
 Rule31Pattern::Rule31Pattern(CRGB *l, int16_t nl) :PatternBase(l,nl) {
     cells[0] =new bool[numLeds];
     cells[1] =new bool[numLeds];
-    cellColors = new uint8_t[numLeds];
+//    cellColors = new uint8_t[numLeds];
     for (int i =0; i<numLeds; i++){
-        cellColors[i] =100;
-        cells[currentCell][i] = random(2);
+    //    cellColors[i] =100;
+       cells[currentCell][i] = random(2);
     }
     currentCell=0;
 }
@@ -41,9 +41,10 @@ void Rule31Pattern::updateCells() {
 
 void Rule31Pattern::updateLeds() {
     uint8_t temp = beatsin8(1,10,20);
-    CRGB color = ColorFromPalette(*currentPallete, cellColors[0], 255, LINEARBLEND);
+    CRGB color = ColorFromPalette(*currentPallete, 10, 255, LINEARBLEND);
     for (uint8_t i =0; i<numLeds;i++){
-        if (random8()%temp ==0){
+        //if (random8()%temp ==0)
+        {
             color = ColorFromPalette(*currentPallete, random8(255)/*cellColors[i]*/, 255, LINEARBLEND);
             leds[i]=color;//ColorFromPalette(*currentPallete, cellColors[i], 255, LINEARBLEND);
         }
@@ -56,5 +57,5 @@ void Rule31Pattern::updateLeds() {
     }
     leds[0] = last;
 
-    updateCells();
+    //updateCells();
 }

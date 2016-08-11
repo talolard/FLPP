@@ -19,7 +19,7 @@ void Fire::updateLeds()
 
     // Step 1.  Cool down every cell a little
     for( int i = 0; i < numLeds; i++) {
-            heat[i] = qsub8( heat[i],  /*((beatsin8(0.1,3,100)) ) + 2*/random8(5));
+            heat[i] = qsub8( heat[i],  /*((beatsin8(0.1,3,100)) ) + 2*/random8(2));
     }
 
     // Step 2.  Heat from each cell drifts 'up' and diffuses a little
@@ -31,7 +31,7 @@ void Fire::updateLeds()
     for (int strip =0; strip < NUM_STRIPS; strip++) {
         if (random8() < beatsin8(0.2, 10, 40)) {
             int y = random8(LEDS_PER_STRIP);
-            heat[LEDS_PER_STRIP*strip+y] = qadd8(heat[y], random8(160, 255));
+            heat[LEDS_PER_STRIP*strip+y] = qadd8(heat[y], random8(200, 255));
         }
     }
 

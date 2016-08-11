@@ -12,11 +12,13 @@
 #include "Fire.h"
 
 PatternChanger::PatternChanger(CRGB* l){
+    patternCode =0;
+    palleteCode=0;
     currentPattern =0;
     leds =l;
     currentPattern =0;
     patternTimeThresh = 600; //30 sec
-    palleteTimeThresh= patternTimeThresh/5;
+    palleteTimeThresh= /*patternTimeThresh/10*/20;
     lastTimeStampPal =millis();
     lastTimeStampPat = millis();
     changePattern();
@@ -41,7 +43,7 @@ void PatternChanger::updateLeds(){
         delay(currentPattern->delayRate);
     }
     else{
-        FastLED.delay(beatsin8(0.5,90,130));
+        FastLED.delay(beatsin8(0.5,60,200));
     }
 
 }
@@ -52,7 +54,7 @@ void PatternChanger::changePattern(){
     PatternServer* PS = PatternServer::getInstance(leds);
     PS->getInstance(leds);
 
-    currentPattern = PS->changePattern(random(4),leds,NUM_LEDS);
+    currentPattern = PS->changePattern(patternCode++ %4,leds,NUM_LEDS);
     //currentPattern = new Fire(leds,NUM_LEDS);
     //changePallete();
 }
@@ -61,7 +63,7 @@ void PatternChanger::changePallete(){
     currentPattern->delPallete();
     //if (!currentPattern->hasPallete())
     {
-        currentPattern->changePattern(PL->changePallete(random(11)));
+        currentPattern->changePattern(PL->changePallete(patternCode++ %30));
     }
 }
 bool PatternChanger::shouldChangePallete(){
@@ -72,7 +74,7 @@ bool PatternChanger::shouldChangePallete(){
     return false;
 }
 bool PatternChanger::shouldChangePattern(){
-    if ((millis() -lastTimeStampPat)/1000 > palleteTimeThresh){
+    if ((millis() -lastTimeStampPat)/1000 > patternTimeThresh){
         lastTimeStampPat=millis();
         return true;
     }

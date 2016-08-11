@@ -49,8 +49,9 @@ void setup() {
 #endif
 
 #ifdef BEAR
-    FastLED.addLeds<WS2812, 35,BRG>(leds,LEDS_PER_STRIP);
+    FastLED.addLeds<WS2812, 8,BRG>(leds,LEDS_PER_STRIP);
     FastLED.addLeds<WS2812, 34,BRG>(leds,LEDS_PER_STRIP);
+    FastLED.addLeds<WS2812, 35,BRG>(leds,LEDS_PER_STRIP);
 #endif
 
 
